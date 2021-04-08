@@ -14,6 +14,6 @@ jobs:
     - name: 📂 Sincronizar archivos
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
-        server: ${{ secrets.FTP_SERVER }}
+        server: ftp.ponceleon.club
         username: ${{ secrets.MASTER_FTP_USER }}
         password: ${{ secrets.MASTER_FTP_PASSWORD }}
