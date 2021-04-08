@@ -1,0 +1,19 @@
+name: 🚀 Deploy a Sitio Principal 
+on:
+  push:
+    branches:
+      - master
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Obtener la última versión del Código
+      uses: actions/checkout@v2.3.2
+
+    - name: 📂 Sincronizar archivos
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.MASTER_FTP_USER }}
+        password: ${{ secrets.MASTER_FTP_PASSWORD }}
