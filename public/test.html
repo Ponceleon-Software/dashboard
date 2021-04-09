@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://unpkg.com/tailwindcss@2.0.2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../src/assets/styles/css/style.css" />
+    <script type="module" src="../src/js/Utils/reactivity.js"></script>
+    <script type="module" src="../src/js/Utils/renderer.js"></script>
+    <link
+      rel="icon"
+      type="image/vnd.microsoft.icon"
+      href="favicon.ico"
+      sizes="32x32"
+    />
+  </head>
+  <body
+    class="h-screen overflow-hidden flex items-center justify-center"
+    style="background: #edf2f7"
+  >
+    <div id="root" class="w-full h-full"></div>
+
+    <script src="https://cdn.jsdelivr.net/gh/alpine-collective/alpine-magic-helpers@0.6.x/dist/component.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js"
+      defer
+    ></script>
+
+    <script>
+      const setup = () => {
+        const getTheme = () => {
+          if (window.localStorage.getItem("dark")) {
+            return JSON.parse(window.localStorage.getItem("dark"));
+          }
+          return (
+            !!window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches
+          );
+        };
+
+        const setTheme = (value) => {
+          window.localStorage.setItem("dark", value);
+        };
+
+        return {
+          loading: true,
+          isDark: getTheme(),
+          toggleTheme() {
+            this.isDark = !this.isDark;
+            setTheme(this.isDark);
+          },
+          setLightTheme() {
+            this.isDark = false;
+            setTheme(this.isDark);
+          },
+          setDarkTheme() {
+            this.isDark = true;
+            setTheme(this.isDark);
+          },
+          watchScreen() {
+            if (window.innerWidth <= 1024) {
+              this.isSidebarOpen = false;
+            } else if (window.innerWidth >= 1024) {
+              this.isSidebarOpen = true;
+            }
+          },
+          isSidebarOpen: window.innerWidth >= 1024 ? true : false,
+          toggleSidbarMenu() {
+            this.isSidebarOpen = !this.isSidebarOpen;
+          },
+          isNotificationsPanelOpen: false,
+          openNotificationsPanel() {
+            this.isNotificationsPanelOpen = true;
+            this.$nextTick(() => {
+              this.$refs.notificationsPanel.focus();
+            });
+          },
+          isSettingsPanelOpen: false,
+          openSettingsPanel() {
+            this.isSettingsPanelOpen = true;
+            this.$nextTick(() => {
+              this.$refs.settingsPanel.focus();
+            });
+          },
+          isSearchPanelOpen: false,
+          openSearchPanel() {
+            this.isSearchPanelOpen = true;
+            this.$nextTick(() => {
+              this.$refs.searchInput.focus();
+            });
+          },
+        };
+      };
+    </script>
+  </body>
+</html>
