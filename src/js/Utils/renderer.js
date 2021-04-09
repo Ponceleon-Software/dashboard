@@ -1,8 +1,7 @@
-import { App } from "../Components/Main.js";
+import { App } from "../Components/App.js";
 window.addEventListener("DOMContentLoaded", (e) => {
   const root = document.getElementById("root");
-  const AppFunction = App();
-  const main = AppFunction.container();
+  const AppObject = App();
+  const main = AppObject.get("appContainer");
   root.appendChild(main);
 });
-console.log("Hola!");
