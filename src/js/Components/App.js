@@ -2,12 +2,16 @@ import { ComponenteReactivo, CustomElement } from "../Utils/reactivity.js";
 import { Sign } from "../Views/Sign.js";
 
 const appElements = (config = {}) => {
+
+  const signForm = Sign.get("form");
+
   return {
     appContainer: CustomElement.create("div", {
       className: "w-full h-full bg-blue-500",
       id: "App",
     }),
-    view: Sign.container,
+    view: signForm,
+
   };
 };
 
