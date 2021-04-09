@@ -106,3 +106,5 @@ const CustomElement = {
     return div.children[0];
   },
 };
+
+export { CustomElement, ComponenteReactivo };
