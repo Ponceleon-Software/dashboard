@@ -1,9 +1,8 @@
 import { ComponenteReactivo, CustomElement } from "../Utils/reactivity.js";
-import { Sign } from "../Views/Sign.js";
+import { Sign } from "../Views/Sign/Sign.js";
 
 const appElements = (config = {}) => {
-
-  const signForm = Sign.get("form");
+  const signForm = Sign().get("parent");
 
   return {
     appContainer: CustomElement.create("div", {
@@ -11,7 +10,6 @@ const appElements = (config = {}) => {
       id: "App",
     }),
     view: signForm,
-
   };
 };
 
