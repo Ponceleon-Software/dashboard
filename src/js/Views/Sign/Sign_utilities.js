@@ -7,9 +7,8 @@
 const switchView = (Sign, Register, Login) => {
   const isInLogin = Sign.state.currentForm == Login.form;
   const View = isInLogin ? Register : Login;
-  console.log(Sign.form);
-
-  Sign.form.addEventListener("click", function aff(e) {
+  const button = !isInLogin ? Register.button : Login.button;
+  button.addEventListener("click", function (e) {
     changeView(e, View);
   });
 
