@@ -36,7 +36,7 @@ const loginFormElements = (config = {}) => {
   return {
     form: C.create("form", {
       className:
-        "h-3/5 bg-base-200 rounded-md shadow-2xl w-3/5 flex flex-col justify-center items-center",
+        "h-3/5 bg-base-200 rounded-md w-3/5 flex flex-col items-center",
       id: "login_form",
     }),
     username_field: user_input.get("parent"),
