@@ -1,4 +1,6 @@
 import { ComponenteReactivo, CustomElement } from "../../Utils/reactivity.js";
+import { LoginForm } from "../Forms/LoginForm.js";
+//import {logoponceleon} from "../../../assets/img/logo-ponceleon.svg"
 /* import { title } from "../Components/Title.js";
 import { form } from "../Components/Form.js"; */
 
@@ -13,17 +15,38 @@ import { form } from "../Components/Form.js"; */
  */
 
 const loginElements = (config = {}) => {
+  const C = CustomElement;
   return {
-    form: CustomElement.create(
+    parent: C.create(
       "div",
-      { className: "bg-red-300 w-96 h-96", id: "Login" },
+      {
+        className:
+          "py-4 artboard artboard-demo bg-base-200 w-1/2 h-full form-control flex flex-col rounded-none",
+        id: "Login",
+      },
       []
     ),
-    button: CustomElement.create(
-      "button",
-      { className: "bg-yellow-300 w-12 h-12", id: "Iniciar_sesion" },
-      []
-    ), //Login.container, //|| Register.Container,
+    form: LoginForm,
+    logo: C.create(
+      "div",
+      {
+        className: "w-4/5 h-20 flex items-center",
+      },
+      [
+        C.create(
+          "img",
+          {
+            className: "h-16",
+            src: "../../../src/assets/img/logo-ponceleon.svg",
+          },
+          []
+        ),
+      ]
+    ),
+    title: C.create("h1", {
+      className: "text-5xl font-bold font-sans  my-10",
+      innerHTML: "Iniciar Sesión",
+    }),
   };
 };
 
@@ -31,14 +54,21 @@ function _Login(elements) {
   this.state = {
     isValid: false,
   };
+  this.parent = elements.parent;
   this.form = elements.form;
-  this.button = elements.button;
-  this.element = elements.form.appendChild(elements.button);
+  this.logo = elements.logo;
+  this.title = elements.title;
+  this.element = elements.parent.append(
+    elements.logo,
+    elements.title,
+    elements.form.get("form")
+  );
+  console.log(this.element);
 
   this.template = function () {
     const state = JSON.parse(JSON.stringify(this.state));
     const { isValid } = state;
-    return [this.form, this.button];
+    return [this.parent, this.logo, this.title];
   };
 }
 _Login.prototype = Object.create(ComponenteReactivo.prototype);
