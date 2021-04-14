@@ -4,23 +4,14 @@
  *
  * @param {Sign} Sign El componente reactivo del panel
  */
-/* const switchView = (Sign, Register, Login) => {
-  const isInLogin = Sign.state.currentForm == Login.getComponent().parent;
-  const View = isInLogin ? Register.getComponent() : Login.getComponent();
-  const View2 = isInLogin ? Login : Register;
-  const button = View2.elements().form.get("button"); //!isInLogin ? Register.button : Login.button;
-  button.addEventListener("click", function (e) {
-    changeView(e, View);
-  });
-}; */
 
 const initSwitchView = (Sign, Register, Login) => {
-  const button_login = Login.elements().form.get("button");
-  const button_register = Register.elements().form.get("button");
-  button_login.addEventListener("click", function (e) {
+  const anchor_goToRegister = Login.elements().dontHaveAccount.childNodes[1];
+  const anchor_goToLogin = Register.elements().alreadyHaveAccount.childNodes[1];
+  anchor_goToRegister.addEventListener("click", function (e) {
     changeView(e, Register.getComponent());
   });
-  button_register.addEventListener("click", function (e) {
+  anchor_goToLogin.addEventListener("click", function (e) {
     changeView(e, Login.getComponent());
   });
   const changeView = (e, View) => {
@@ -28,4 +19,26 @@ const initSwitchView = (Sign, Register, Login) => {
   };
 };
 
-export { initSwitchView };
+const randomWallpaperImg = (el) => {
+  const getRandEl = function (array) {
+    let arrayWithoutActual = array.slice();
+    if (el) {
+      arrayWithoutActual = array.filter(function (x) {
+        return x !== el;
+      });
+    }
+
+    return arrayWithoutActual[Math.floor(Math.random() * array.length)];
+  };
+  const refPath = "../../src/assets/img/backgrounds/";
+  const imgs = ["orange-forest", "beach-trip", "clouds", "nebula"];
+  const result = getRandEl(imgs);
+  const img = `${refPath + result}.webp`;
+  return img;
+};
+
+/* const Login(username,password)=()=>{
+  //const url=
+}
+ */
+export { initSwitchView, randomWallpaperImg };

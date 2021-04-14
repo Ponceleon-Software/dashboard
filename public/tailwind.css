@@ -59,3 +59,6 @@
 .hover\:overflow-y-auto:hover {
   overflow-y: auto;
 }
+.w-38 {
+  width: 9.5rem;
+}

@@ -7,9 +7,11 @@ const inputElements = (
     labelText: "Titulo",
     className: "w-full",
     fieldsetClass: "w-3/4",
+    hasLabel: true,
+    pattern: "",
   }
 ) => {
-  const { type, placeholder, labelText } = config;
+  const { type, pattern, placeholder, labelText } = config;
   const className = config.className ? config.className : "w-full";
   const fieldsetClass = config.fieldsetClass ? config.fieldsetClass : "w-3/4";
   const C = CustomElement;
@@ -22,6 +24,7 @@ const inputElements = (
       }),
     ]),
     input: C.create("input", {
+      pattern: pattern,
       type: type,
       className: `${className} input input-bordered`,
       placeholder: placeholder,

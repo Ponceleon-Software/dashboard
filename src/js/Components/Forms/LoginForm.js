@@ -1,8 +1,6 @@
 import { ComponenteReactivo, CustomElement } from "../../Utils/reactivity.js";
 import { Input } from "../Inputs/Input.js";
 import { Button } from "../Buttons/Button.js";
-/* import { title } from "../Components/Title.js";
-import { form } from "../Components/Form.js"; */
 
 /**
  * Agrupa todos los elementos que definen el Componente de Login
@@ -60,7 +58,7 @@ function _LoginForm(elements) {
   this.template = function () {
     const state = JSON.parse(JSON.stringify(this.state));
     const { allFieldsValid } = state;
-    return [this.form, this.username_field, this.password_field, this.button];
+    return [this.button, this.form, this.password_field, this.username_field];
   };
 }
 _LoginForm.prototype = Object.create(ComponenteReactivo.prototype);
@@ -71,7 +69,7 @@ const LoginForm = ((config = {}) => {
   const component = new _LoginForm(elements);
 
   return {
-    container: () => elements.form,
+    container: () => elements.element,
     elements: () => elements,
     get: (elementName) => elements[elementName],
     getElements: () => elements,

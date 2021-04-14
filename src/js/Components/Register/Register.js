@@ -1,5 +1,5 @@
 import { ComponenteReactivo, CustomElement } from "../../Utils/reactivity.js";
-import { RegisterForm } from "../Forms/RegsiterForm.js";
+import { RegisterForm } from "../Forms/RegisterForm.js";
 
 /**
  * Agrupa todos los elementos que definen el Componente de Login
@@ -18,7 +18,7 @@ const registerElements = (config = {}) => {
       "div",
       {
         className:
-          "py-4 artboard artboard-demo bg-base-300 w-1/2 h-full form-control flex flex-col rounded-none",
+          "py-4 artboard artboard-demo bg-base-200 w-1/2 h-full form-control flex flex-col rounded-none",
         id: "Register",
       },
       []
@@ -27,7 +27,7 @@ const registerElements = (config = {}) => {
     logo: C.create(
       "div",
       {
-        className: "w-full h-20 flex items-center",
+        className: "w-4/5 h-20 mt-7 flex items-center",
       },
       [
         C.create(
@@ -41,9 +41,19 @@ const registerElements = (config = {}) => {
       ]
     ),
     title: C.create("h1", {
-      className: "text-5xl font-bold font-sans  my-10",
+      className: "text-3xl font-bold font-sans  my-10",
       innerHTML: "Registrarse",
     }),
+    alreadyHaveAccount: C.create(
+      "p",
+      { className: "mt-3", innerHTML: "¿Ya Tienes una cuenta?" },
+      [
+        C.create("a", {
+          className: "font-bold cursor-pointer underline",
+          innerHTML: "Iniciar Sesión",
+        }),
+      ]
+    ),
   };
 };
 
@@ -55,16 +65,24 @@ function _Register(elements) {
   this.form = elements.form;
   this.logo = elements.logo;
   this.title = elements.title;
+  this.alreadyHaveAccount = elements.alreadyHaveAccount;
   this.element = elements.parent.append(
     elements.logo,
     elements.title,
-    elements.form.get("form")
+    elements.form.get("form"),
+    elements.alreadyHaveAccount
   );
 
   this.template = function () {
     const state = JSON.parse(JSON.stringify(this.state));
     const { isValidRegister } = state;
-    return [this.form];
+    return [
+      this.form,
+      this.logo,
+      this.parent,
+      this.title,
+      this.alreadyHaveAccount,
+    ];
   };
 }
 _Register.prototype = Object.create(ComponenteReactivo.prototype);
@@ -75,9 +93,8 @@ const Register = ((config = {}) => {
   const component = new _Register(elements);
 
   return {
-    container: () => elements.form,
+    container: () => elements.element,
     elements: () => elements,
-    changeForm: (form) => component.setState({ form: form }),
     get: (elementName) => elements[elementName],
     getComponent: () => component,
   };

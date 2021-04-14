@@ -44,15 +44,25 @@ const loginElements = (config = {}) => {
       ]
     ),
     title: C.create("h1", {
-      className: "text-5xl font-bold font-sans  my-10",
+      className: "text-3xl font-bold font-sans  my-10",
       innerHTML: "Iniciar Sesión",
     }),
+    dontHaveAccount: C.create(
+      "p",
+      { innerHTML: "¿Aún no tienes una cuenta? " },
+      [
+        C.create("a", {
+          className: "font-bold cursor-pointer underline",
+          innerHTML: "Regístrate",
+        }),
+      ]
+    ),
   };
 };
 
 function _Login(elements) {
   this.state = {
-    isValid: false,
+    isLogged: false,
   };
   this.parent = elements.parent;
   this.form = elements.form;
@@ -61,14 +71,20 @@ function _Login(elements) {
   this.element = elements.parent.append(
     elements.logo,
     elements.title,
-    elements.form.get("form")
+    elements.form.get("form"),
+    elements.dontHaveAccount
   );
-  console.log(this.element);
 
   this.template = function () {
     const state = JSON.parse(JSON.stringify(this.state));
-    const { isValid } = state;
-    return [this.parent, this.logo, this.title];
+    const { isLogged } = state;
+    return [
+      this.form,
+      this.logo,
+      this.parent,
+      this.title,
+      this.dontHaveAccount,
+    ];
   };
 }
 _Login.prototype = Object.create(ComponenteReactivo.prototype);
@@ -80,7 +96,6 @@ const Login = ((config = {}) => {
   return {
     container: () => elements.element,
     elements: () => elements,
-    changeForm: (form) => component.setState({ form: form }),
     get: (elementName) => elements[elementName],
     getComponent: () => component,
   };

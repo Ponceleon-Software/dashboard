@@ -2,7 +2,7 @@ import { ComponenteReactivo, CustomElement } from "../Utils/reactivity.js";
 import { Sign } from "../Views/Sign/Sign.js";
 
 const appElements = (config = {}) => {
-  const signForm = Sign().get("parent");
+  const signForm = Sign.get("parent");
 
   return {
     appContainer: CustomElement.create("div", {
