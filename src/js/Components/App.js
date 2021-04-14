@@ -3,7 +3,6 @@ import { Sign } from "../Views/Sign/Sign.js";
 
 const appElements = (config = {}) => {
   const signForm = Sign.get("parent");
-
   return {
     appContainer: CustomElement.create("div", {
       className: "w-full h-full bg-blue-500",
@@ -16,7 +15,7 @@ const appElements = (config = {}) => {
 function _App(elements) {
   this.state = {
     isLogged: false,
-    currentView: false,
+    currentView: elements.view,
   };
 
   this.element = elements.appContainer;
@@ -26,7 +25,9 @@ function _App(elements) {
     const state = JSON.parse(JSON.stringify(this.state));
     const { isLogged, currentView } = state;
     /*this.currentView = this.view;
-    this.isLogged= false; //PENDIENTE*/
+     this.isLogged= false; //PENDIENTE*/
+    console.log(this.state.currentView);
+    //this.view=this.state.currentView;
     return [this.view];
   };
 }
@@ -43,7 +44,7 @@ const App = (config = {}) => {
   return {
     container: () => elements.appContainer,
     elements: () => elements,
-    changeView: (view) => component.setState({ view: view }),
+    changeView: (view) => component.setState({ currentView: view }),
     get: (elementName) => elements[elementName],
   };
 };

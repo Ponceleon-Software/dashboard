@@ -1,7 +1,11 @@
 import { ComponenteReactivo, CustomElement } from "../../Utils/reactivity.js";
 import { Login } from "../../Components/Login/Login.js";
 import { Register } from "../../Components/Register/Register.js";
-import { initSwitchView, randomWallpaperImg } from "./Sign_utilities.js";
+import {
+  initSwitchView,
+  randomWallpaperImg,
+  initRegister,
+} from "./Sign_utilities.js";
 
 const signElements = (config = {}) => {
   return {
@@ -22,15 +26,16 @@ function _Sign(elements) {
   this.state = {
     currentForm: Login.get("parent"),
     currentWallpaper: elements.background.src,
+    isLogged: false,
   };
   this.element = elements.parent;
   this.form = elements.form;
   this.background = elements.background;
 
   this.template = function () {
-    const background = [];
     const state = JSON.parse(JSON.stringify(this.state));
-    const { currentForm, currentWallpaper } = state;
+    const { currentForm, currentWallpaper, isLogged } = state;
+    console.log(isLogged);
     this.background.src = randomWallpaperImg(currentWallpaper);
     this.form = this.state.currentForm;
 
@@ -46,6 +51,7 @@ const Sign = ((config = {}) => {
   elements.parent.appendChild(elements.background);
   const component = new _Sign(elements);
   initSwitchView(component, Register, Login);
+  initRegister(Register);
   return {
     container: () => elements.parent,
     elements: () => elements,
@@ -53,7 +59,6 @@ const Sign = ((config = {}) => {
       component.setState({ currentWallpaper: wallpaper }),
     get: (elementName) => elements[elementName],
     getComponent: () => component,
-    //switch: () => switchView(component, Register, Login),
   };
 })();
 export { Sign };

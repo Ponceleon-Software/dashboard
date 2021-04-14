@@ -2,6 +2,7 @@ import { ComponenteReactivo, CustomElement } from "../../Utils/reactivity.js";
 import { Input } from "../Inputs/Input.js";
 import { Button } from "../Buttons/Button.js";
 import { Select } from "../Selects/Select.js";
+import { validate_register_fields, getData } from "./registerForm_Utilities.js";
 
 /**
  * Agrupa todos los elementos que definen el Componente de Login
@@ -40,7 +41,7 @@ const registerFormElements = (config = {}) => {
   const register_button = Button({
     buttonText: "Registrarme",
     action: "undefined",
-    id: "btn_login",
+    id: "btn_register",
     className: "mt-6 bg-black",
   });
   const phone_input = Input({
@@ -124,6 +125,8 @@ const RegisterForm = ((config = {}) => {
     get: (elementName) => elements[elementName],
     getElements: () => elements,
     getComponent: () => component,
+    validateFields: () => validate_register_fields(),
+    getData: () => getData(),
   };
 })();
 export { RegisterForm };

@@ -4,6 +4,7 @@
  *
  * @param {Sign} Sign El componente reactivo del panel
  */
+import { changeMainView } from "../../Components/app_utilities.js";
 
 const initSwitchView = (Sign, Register, Login) => {
   const anchor_goToRegister = Login.elements().dontHaveAccount.childNodes[1];
@@ -36,9 +37,39 @@ const randomWallpaperImg = (el) => {
   const img = `${refPath + result}.webp`;
   return img;
 };
+const initRegister = (Register) => {
+  const button_register = Register.elements().form.elements().button;
 
-/* const Login(username,password)=()=>{
-  //const url=
-}
- */
-export { initSwitchView, randomWallpaperImg };
+  button_register.addEventListener("click", function (e) {
+    const fieldsValid = Register.elements().form.validateFields();
+    if (fieldsValid) {
+      const data = Register.elements().form.getData();
+      console.log(data);
+      createAccount(data);
+    }
+  });
+  console.log(button_register);
+};
+
+const createAccount = () => {
+  console.log("Cuenta creada con exito");
+  changeMainView();
+};
+/* 
+const { username, password } = data;
+firebase
+  .auth()
+  .createUserWithEmailAndPassword(username, password)
+  .then((userCredential) => {
+    const user = userCredential.user;
+    Sign.setState({ isLogged: true });
+    // ...
+  })
+  .catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.log(error, errorMessage);
+    // ..
+  }); */
+
+export { initSwitchView, randomWallpaperImg, initRegister };
