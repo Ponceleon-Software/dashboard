@@ -5,27 +5,50 @@
 ```
 📦dashboard
  ┣ 📂public
- ┃ ┗ 📜index.html
+ ┃ ┣ 📜favicon.ico
+ ┃ ┣ 📜index.html
+ ┃ ┣ 📜tailwind.css
+ ┃ ┗ 📜test.html
  ┣ 📂src
  ┃ ┣ 📂assets
  ┃ ┃ ┣ 📂img
+ ┃ ┃ ┃ ┣ 📂backgrounds
+ ┃ ┃ ┃ ┃ ┣ 📜beach-trip.webp
+ ┃ ┃ ┃ ┃ ┣ 📜clouds.webp
+ ┃ ┃ ┃ ┃ ┣ 📜nebula.webp
+ ┃ ┃ ┃ ┃ ┗ 📜orange-forest.webp
  ┃ ┃ ┃ ┗ 📜logo-ponceleon.svg
  ┃ ┃ ┗ 📂styles
- ┃ ┃ ┃ ┣ 📂css
- ┃ ┃ ┃ ┃ ┗ 📜style.css
- ┃ ┃ ┃ ┗ 📂sass
+ ┃ ┃ ┃ ┗ 📜style.css
  ┃ ┗ 📂js
  ┃ ┃ ┣ 📂Components
- ┃ ┃ ┃ ┣ 📂Panel
- ┃ ┃ ┃ ┃ ┣ 📜Panel.js //Estado, estructura y template
- ┃ ┃ ┃ ┃ ┗ 📜panel_utils.js //Funcionalidades
- ┃ ┃ ┃ ┣ 📂Card
- ┃ ┃ ┃ ┗ 📂Drawer
+ ┃ ┃ ┃ ┣ 📂Buttons
+ ┃ ┃ ┃ ┃ ┗ 📜Button.js
+ ┃ ┃ ┃ ┣ 📂Forms
+ ┃ ┃ ┃ ┃ ┣ 📜LoginForm.js
+ ┃ ┃ ┃ ┃ ┗ 📜RegisterForm.js
+ ┃ ┃ ┃ ┣ 📂Inputs
+ ┃ ┃ ┃ ┃ ┗ 📜Input.js
+ ┃ ┃ ┃ ┣ 📂Login
+ ┃ ┃ ┃ ┃ ┣ 📜Login.js
+ ┃ ┃ ┃ ┃ ┗ 📜login_Utilities.js
+ ┃ ┃ ┃ ┣ 📂Register
+ ┃ ┃ ┃ ┃ ┗ 📜Register.js
+ ┃ ┃ ┃ ┣ 📂Selects
+ ┃ ┃ ┃ ┃ ┗ 📜Select.js
+ ┃ ┃ ┃ ┗ 📜App.js
+ ┃ ┃ ┣ 📂Register
  ┃ ┃ ┣ 📂Utils
  ┃ ┃ ┃ ┣ 📜reactivity.js
  ┃ ┃ ┃ ┗ 📜renderer.js
  ┃ ┃ ┗ 📂Views
+ ┃ ┃ ┃ ┣ 📂Sign
+ ┃ ┃ ┃ ┃ ┣ 📜Sign.js
+ ┃ ┃ ┃ ┃ ┗ 📜Sign_utilities.js
+ ┃ ┃ ┃ ┗ 📜Dashboard.js
  ┣ 📜.gitignore
  ┣ 📜LICENSE
+ ┣ 📜package-lock.json
+ ┣ 📜package.json
  ┗ 📜README.md
 ```

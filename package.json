@@ -4,7 +4,8 @@
   "description": " ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "tailwind build src/assets/styles/style.css -o public/tailwind.css"
   },
   "repository": {
     "type": "git",
@@ -36,5 +37,8 @@
     "autoprefixer": "^10.2.5",
     "postcss": "^8.2.9",
     "tailwindcss": "^2.1.1"
+  },
+  "dependencies": {
+    "daisyui": "^0.15.3"
   }
 }
