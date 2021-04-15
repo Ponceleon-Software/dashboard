@@ -41,19 +41,20 @@ const initRegister = (Register) => {
   const button_register = Register.elements().form.elements().button;
 
   button_register.addEventListener("click", function (e) {
+    Register.elements().form.validateFields();
     const fieldsValid = Register.elements().form.validateFields();
     if (fieldsValid) {
       const data = Register.elements().form.getData();
-      console.log(data);
-      createAccount(data);
+      const { email, password } = data;
+      createAccount(email, password);
     }
   });
   console.log(button_register);
 };
 
-const createAccount = () => {
-  console.log("Cuenta creada con exito");
-  changeMainView();
+const createAccount = (email, password) => {
+  console.log("Cuenta creada con exito con los datos", email, password);
+  //changeMainView();
 };
 /* 
 const { username, password } = data;

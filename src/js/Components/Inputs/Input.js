@@ -1,4 +1,5 @@
 import { ComponenteReactivo, CustomElement } from "../../Utils/reactivity.js";
+import { initValidateInput } from "./input_Utilities.js";
 
 const inputElements = (
   config = {
@@ -9,11 +10,23 @@ const inputElements = (
     fieldsetClass: "w-3/4",
     hasLabel: true,
     pattern: "",
+    isRequired: false,
+    name: "heregoesthename",
   }
 ) => {
-  const { type, pattern, placeholder, labelText } = config;
+  const { type, placeholder, labelText, isRequired, name } = config;
+  const pattern = config.pattern ? config.pattern : "";
   const className = config.className ? config.className : "w-full";
   const fieldsetClass = config.fieldsetClass ? config.fieldsetClass : "w-3/4";
+  const inputConfig = {
+    name: name,
+    fieldsetClass: fieldsetClass,
+    required: isRequired,
+    type: type,
+    className: `${className} input input-bordered`,
+    placeholder: placeholder,
+  };
+  if (pattern) inputConfig.pattern = pattern;
   const C = CustomElement;
   return {
     parent: C.create("fieldset", { className: fieldsetClass }),
@@ -23,12 +36,7 @@ const inputElements = (
         innerHTML: labelText,
       }),
     ]),
-    input: C.create("input", {
-      pattern: pattern,
-      type: type,
-      className: `${className} input input-bordered`,
-      placeholder: placeholder,
-    }),
+    input: C.create("input", inputConfig),
   };
 };
 
@@ -57,6 +65,7 @@ _Input.prototype.constructor = _Input;
 const Input = (config = {}) => {
   const elements = inputElements(config);
   const component = new _Input(elements);
+  initValidateInput(elements.input);
   return {
     container: () => elements.element,
     elements: () => elements,

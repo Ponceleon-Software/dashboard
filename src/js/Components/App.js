@@ -26,7 +26,12 @@ function _App(elements) {
     const { isLogged, currentView } = state;
     /*this.currentView = this.view;
      this.isLogged= false; //PENDIENTE*/
-    console.log(this.state.currentView);
+    if (this.state.currentView.currentView) {
+      console.log(this.state.currentView.currentView);
+      this.view = this.state.currentView.currentView;
+    }
+    elements.appContainer.appendChild(this.view);
+    //this.view = this.state.currentView.outerHTML;
     //this.view=this.state.currentView;
     return [this.view];
   };

@@ -21,7 +21,7 @@ const loginElements = (config = {}) => {
       "div",
       {
         className:
-          "py-4 artboard artboard-demo bg-base-200 w-1/2 h-full form-control flex flex-col rounded-none",
+          "py-4 artboard artboard-demo bg-base-200 w-full md:w-1/2 h-full form-control flex flex-col rounded-none",
         id: "Login",
       },
       []

@@ -51,7 +51,8 @@ ComponenteReactivo.prototype = {
       if (!child[index]) {
         this.element.appendChild(el);
       } else if (el !== child[index]) {
-        if (el.contains(child[index])) return false;
+        //if (el.contains(child[index])) return false;
+
         this.element.replaceChild(el, child[index]);
       }
     });
@@ -77,7 +78,7 @@ const CustomElement = {
    * @param {HTMLElement[]} children Un arreglo de elementos que
    * se añadirán como hijos del elemento creado
    */
-  create: (tagName, options = {}, children = []) => {
+  create: (tagName, options = {}, children = [], onClick) => {
     const elemento = document.createElement(tagName);
 
     for (let key in options) {
@@ -85,7 +86,7 @@ const CustomElement = {
         elemento[key] = options[key];
       }
     }
-
+    if (typeof onClick === "function") elemento.onclick = onClick;
     children.forEach((value) => {
       elemento.appendChild(value);
     });

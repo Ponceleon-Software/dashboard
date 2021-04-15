@@ -20,29 +20,38 @@ const registerFormElements = (config = {}) => {
     type: "text",
     placeholder: "Nombre de Usuario",
     labelText: "Usuario",
+    pattern: "^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$",
+    isRequired: true,
+    name: "user",
   });
   const email_input = Input({
     type: "email",
     placeholder: "Dirección de correo",
     labelText: "Correo Electrónico",
+    isRequired: true,
+    name: "email",
   });
   const password_input = Input({
     type: "password",
     placeholder: "Contraseña",
     labelText: "Contraseña",
     fieldsetClass: "w-38",
+    name: "password",
   });
   const repeat_password_input = Input({
     type: "password",
     placeholder: "Repita la Contraseña",
     labelText: "Repetir Contraseña",
     fieldsetClass: "w-38",
+    name: "repeat_password",
   });
   const register_button = Button({
     buttonText: "Registrarme",
     action: "undefined",
     id: "btn_register",
     className: "mt-6 bg-black",
+    type: "submit",
+    form: "register_form",
   });
   const phone_input = Input({
     type: "tel",
@@ -50,6 +59,7 @@ const registerFormElements = (config = {}) => {
     labelText: "Teléfono de Contacto",
     fieldsetClass: "w-2/3",
     pattern: "[0-9]{7}",
+    name: "phone",
   });
 
   const phone_code_input = Select({
@@ -59,13 +69,15 @@ const registerFormElements = (config = {}) => {
     fieldsetClass: "w-1/3",
     hasLabel: true,
     options: ["🇻🇪+58", "🇨🇴+57"],
+    name: "phone_code",
   });
 
   return {
     form: C.create("form", {
       className:
         "h-4/5 bg-base-200 rounded-md w-3/5 flex flex-col justify-center items-center",
-      id: "login_form",
+      id: "register_form",
+      method: "post",
     }),
     username_field: username_input.get("parent"),
     password_fields: C.create(
@@ -91,6 +103,7 @@ function _RegisterForm(elements) {
   this.password_fields = elements.password_fields;
   this.email_field = elements.email_field;
   this.phone_fields = elements.phone_field;
+  this.button = elements.button;
   elements.form.append(
     elements.username_field,
     elements.email_field,
@@ -99,17 +112,12 @@ function _RegisterForm(elements) {
     elements.button
   );
   this.element = elements.form;
-  this.button = elements.button;
   this.template = function () {
     const state = JSON.parse(JSON.stringify(this.state));
     const { allFieldsValid } = state;
-    return [
-      this.form,
-      this.username_field,
-      this.password_fields,
-      this.email_field,
-      this.button,
-    ];
+    console.log(this.form);
+
+    return [this.form];
   };
 }
 _RegisterForm.prototype = Object.create(ComponenteReactivo.prototype);
@@ -125,8 +133,15 @@ const RegisterForm = ((config = {}) => {
     get: (elementName) => elements[elementName],
     getElements: () => elements,
     getComponent: () => component,
+    getFields: () => [
+      elements.username_field,
+      elements.email_field,
+      elements.password_fields,
+      elements.phone_fields,
+    ],
     validateFields: () => validate_register_fields(),
     getData: () => getData(),
+    setValid: (valid = true) => component.setState({ allFieldsValid: valid }),
   };
 })();
 export { RegisterForm };

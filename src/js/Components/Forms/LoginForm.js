@@ -18,17 +18,21 @@ const loginFormElements = (config = {}) => {
     type: "text",
     placeholder: "Nombre de Usuario",
     labelText: "Usuario",
+    isRequired: true,
   });
   const password_input = Input({
     type: "password",
     placeholder: "Contraseña",
     labelText: "Contraseña",
+    isRequired: true,
   });
   const login_button = Button({
     buttonText: "Iniciar Sesión",
     action: "undefined",
     id: "btn_login",
     className: "mt-10 bg-black",
+    type: "submit",
+    form: "login_form",
   });
 
   return {
