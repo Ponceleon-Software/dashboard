@@ -1,18 +1,7 @@
-import { ComponenteReactivo, CustomElement } from "../Utils/reactivity.js";
 import { App } from "./App.js";
-
+import { Dashboard } from "../Views/Dashboard.js";
 const changeMainView = () => {
-  App().changeView({
-    currentView: CustomElement.create(
-      "div",
-      {
-        className: "bg-green-200 w-full h-full flex",
-        id: "Dashboard",
-        innerHtml: "Bienvenido",
-      },
-      []
-    ),
-  });
+  App.changeView(Dashboard.get("parent"));
 };
 
 export { changeMainView };
