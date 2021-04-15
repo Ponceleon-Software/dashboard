@@ -4,6 +4,7 @@
  *
  * @param {Sign} Sign El componente reactivo del panel
  */
+import { changeMainView } from "../../Components/app_utilities.js";
 
 const initSwitchView = (Sign, Register, Login) => {
   const anchor_goToRegister = Login.elements().dontHaveAccount.childNodes[1];
@@ -36,9 +37,39 @@ const randomWallpaperImg = (el) => {
   const img = `${refPath + result}.webp`;
   return img;
 };
+const initRegister = (Register) => {
+  const button_register = Register.elements().form.elements().button;
 
-/* const Login(username,password)=()=>{
-  //const url=
-}
- */
-export { initSwitchView, randomWallpaperImg };
+  button_register.addEventListener("click", function (e) {
+    Register.elements().form.validateFields();
+    const fieldsValid = Register.elements().form.getComponent().state
+      .allFieldsValid;
+    if (fieldsValid) {
+      const data = Register.elements().form.getData();
+      const { email, password } = data;
+      createAccount(email, password);
+    }
+  });
+};
+
+const createAccount = async (email, password) => {
+  firebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      //Sign.setState({ isLogged: true, token: user });
+      changeMainView();
+      // ...
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(error, errorMessage);
+      // ..
+    });
+
+  //changeMainView();
+};
+
+export { initSwitchView, randomWallpaperImg, initRegister };

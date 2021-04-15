@@ -6,16 +6,30 @@ const buttonElements = (
     action: "undefined",
     id: "id_here",
     className: "",
+    type: "button",
+    form: "",
   }
 ) => {
-  const { className, buttonText, id } = config;
+  const { className, buttonText, id, type, form } = config;
+
   const C = CustomElement;
+  const button_config = {
+    className: `btn ${className}`,
+    innerHTML: buttonText,
+    id: id,
+    type: type,
+  };
+  let stopReload;
+  if (config.type == "submit")
+    stopReload = (e) => {
+      e.preventDefault();
+      var ele = document.getElementById(form);
+      var chk_status = ele.checkValidity();
+      ele.reportValidity();
+    };
+
   return {
-    button: C.create("div", {
-      className: `btn ${className}`,
-      innerHTML: buttonText,
-      id: id,
-    }),
+    button: C.create("button", button_config, [], stopReload),
   };
 };
 
