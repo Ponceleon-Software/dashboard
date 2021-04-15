@@ -18,7 +18,6 @@ const selectElements = (
     const option = C.create("option", { value: e, innerHTML: e });
     return option;
   });
-  console.log(optionsElements);
   const elements = {
     parent: C.create("fieldset", { className: fieldsetClass }),
     label: C.create("label", { className: "label" }, [

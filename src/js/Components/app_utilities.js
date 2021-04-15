@@ -5,7 +5,11 @@ const changeMainView = () => {
   App().changeView({
     currentView: CustomElement.create(
       "div",
-      { className: "bg-green-200 w-full h-full flex", id: "Dashboard" },
+      {
+        className: "bg-green-200 w-full h-full flex",
+        id: "Dashboard",
+        innerHtml: "Bienvenido",
+      },
       []
     ),
   });

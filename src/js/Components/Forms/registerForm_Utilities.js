@@ -5,11 +5,19 @@ const validate_register_fields = () => {
   const fields = Array.prototype.slice.call(form.getElementsByTagName("input"));
   const validityArray = [];
   fields.forEach((el) => {
+    if (el.getAttribute("type") == "password") {
+      const password_fields = RegisterForm.get(
+        "password_fields"
+      ).getElementsByTagName("input");
+      if (password_fields[0].value == password_fields[1].value)
+        validityArray.push(el.checkValidity());
+      return;
+    }
     validityArray.push(el.checkValidity());
   });
-
+  console.log(validityArray);
   let allValid = validityArray.every(Boolean);
-  //if (allValid) RegisterForm.setValid(true);
+  if (allValid) RegisterForm.setValid(true);
   return allValid;
 };
 
@@ -22,4 +30,6 @@ const getData = () => {
   });
   return data;
 };
+
+const samePasswords = () => {};
 export { validate_register_fields, getData };

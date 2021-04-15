@@ -25,6 +25,9 @@ const validateAfterFocus = (input) => {
   if (!input.checkValidity()) {
     input.classList.remove("input-warning");
     input.classList.add("input-error");
+    return;
   }
+  input.classList.remove("input-warning");
+  input.classList.add("input-success");
 };
 export { initValidateInput };

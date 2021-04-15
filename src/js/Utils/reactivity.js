@@ -51,8 +51,6 @@ ComponenteReactivo.prototype = {
       if (!child[index]) {
         this.element.appendChild(el);
       } else if (el !== child[index]) {
-        //if (el.contains(child[index])) return false;
-
         this.element.replaceChild(el, child[index]);
       }
     });

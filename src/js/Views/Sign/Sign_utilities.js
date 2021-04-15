@@ -42,35 +42,34 @@ const initRegister = (Register) => {
 
   button_register.addEventListener("click", function (e) {
     Register.elements().form.validateFields();
-    const fieldsValid = Register.elements().form.validateFields();
+    const fieldsValid = Register.elements().form.getComponent().state
+      .allFieldsValid;
     if (fieldsValid) {
       const data = Register.elements().form.getData();
       const { email, password } = data;
       createAccount(email, password);
     }
   });
-  console.log(button_register);
 };
 
-const createAccount = (email, password) => {
-  console.log("Cuenta creada con exito con los datos", email, password);
+const createAccount = async (email, password) => {
+  firebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      //Sign.setState({ isLogged: true, token: user });
+      changeMainView();
+      // ...
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(error, errorMessage);
+      // ..
+    });
+
   //changeMainView();
 };
-/* 
-const { username, password } = data;
-firebase
-  .auth()
-  .createUserWithEmailAndPassword(username, password)
-  .then((userCredential) => {
-    const user = userCredential.user;
-    Sign.setState({ isLogged: true });
-    // ...
-  })
-  .catch((error) => {
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    console.log(error, errorMessage);
-    // ..
-  }); */
 
 export { initSwitchView, randomWallpaperImg, initRegister };

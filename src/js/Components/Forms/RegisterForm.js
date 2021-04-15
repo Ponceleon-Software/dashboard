@@ -32,18 +32,22 @@ const registerFormElements = (config = {}) => {
     name: "email",
   });
   const password_input = Input({
-    type: "password",
+    type: "text",
     placeholder: "Contraseña",
     labelText: "Contraseña",
     fieldsetClass: "w-38",
     name: "password",
+    pattern: "(?=^.{8,}$)((?=.*d)|(?=.*W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$",
+    isRequired: true,
   });
   const repeat_password_input = Input({
-    type: "password",
+    type: "text",
     placeholder: "Repita la Contraseña",
     labelText: "Repetir Contraseña",
     fieldsetClass: "w-38",
     name: "repeat_password",
+    pattern: "(?=^.{8,}$)((?=.*d)|(?=.*W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$",
+    isRequired: true,
   });
   const register_button = Button({
     buttonText: "Registrarme",
@@ -100,9 +104,10 @@ function _RegisterForm(elements) {
     allFieldsValid: false,
   };
   this.form = elements.form;
-  this.password_fields = elements.password_fields;
+  this.username_field = elements.username_field;
   this.email_field = elements.email_field;
-  this.phone_fields = elements.phone_field;
+  this.password_fields = elements.password_fields;
+  this.phone_fields = elements.phone_fields;
   this.button = elements.button;
   elements.form.append(
     elements.username_field,
@@ -117,7 +122,13 @@ function _RegisterForm(elements) {
     const { allFieldsValid } = state;
     console.log(this.form);
 
-    return [this.form];
+    return [
+      this.username_field,
+      this.email_field,
+      this.password_fields,
+      this.phone_fields,
+      this.button,
+    ];
   };
 }
 _RegisterForm.prototype = Object.create(ComponenteReactivo.prototype);
