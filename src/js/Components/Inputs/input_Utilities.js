@@ -12,7 +12,7 @@ const validateInput = (input) => {
 };
 
 const initValidateInput = (input) => {
-  if (input.getAttribute("pattern") == "") return;
+  if (input.getAttribute("pattern") == " ") return;
   input.addEventListener("keyup", function (e) {
     validateInput(input);
   });

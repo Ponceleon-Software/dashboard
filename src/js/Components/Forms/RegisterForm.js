@@ -30,6 +30,8 @@ const registerFormElements = (config = {}) => {
     labelText: "Correo Electrónico",
     isRequired: true,
     name: "email",
+    pattern:
+      "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)$",
   });
   const password_input = Input({
     type: "text",
