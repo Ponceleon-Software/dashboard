@@ -71,5 +71,35 @@ const createAccount = async (email, password) => {
 
   //changeMainView();
 };
+const initLogin = (Login) => {
+  const button_login = Login.elements().form.elements().button;
 
-export { initSwitchView, randomWallpaperImg, initRegister };
+  button_login.addEventListener("click", function (e) {
+    Login.elements().form.validateFields();
+    const fieldsValid = Login.elements().form.getComponent().state
+      .allFieldsValid;
+    if (fieldsValid) {
+      const data = Login.elements().form.getData();
+      const { email, password } = data;
+      login(email, password);
+    }
+  });
+};
+const login = async (email, password) => {
+  firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      // Signed in
+      var user = userCredential.user;
+      console.log(user);
+      changeMainView();
+      // ...
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+    });
+};
+
+export { initSwitchView, randomWallpaperImg, initRegister, initLogin };
