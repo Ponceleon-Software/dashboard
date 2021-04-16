@@ -1,7 +1,7 @@
 import { RegisterForm } from "./RegisterForm.js";
 
 const validate_register_fields = () => {
-  const form = RegisterForm.getElements("form").form;
+  const form = RegisterForm.elements("form").form;
   const fields = Array.prototype.slice.call(form.getElementsByTagName("input"));
   const validityArray = [];
   fields.forEach((el) => {
@@ -32,7 +32,7 @@ const validate_register_fields = () => {
  */
 
 const getData = () => {
-  const form = RegisterForm.getElements("form").form;
+  const form = RegisterForm.elements("form").form;
   const fields = Array.prototype.slice.call(form.getElementsByTagName("input"));
   const data = {};
   fields.forEach((el) => {
@@ -42,7 +42,7 @@ const getData = () => {
 };
 
 const samePasswords = () => {
-  const form = RegisterForm.getElements("form").form;
+  const form = RegisterForm.elements("form").form;
   const fields = Array.prototype.slice.call(form.getElementsByTagName("input"));
   const pw_fields = fields.filter((el) => {
     if (el.getAttribute("type") == "password") return el;
