@@ -43,7 +43,7 @@ const registerFormElements = (config = {}) => {
     labelText: "Contraseña",
     fieldsetClass: "w-38",
     name: "password",
-    pattern: "/[0-9a-zA-Z]{6,}/", //regex: (?=^.{8,}$)((?=.*d)|(?=.*W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$   // min: 8char,1Uppercase,1symbol/number
+    pattern: "", //regex: (?=^.{8,}$)((?=.*d)|(?=.*W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$   // min: 8char,1Uppercase,1symbol/number
     isRequired: true,
   });
   const repeat_password_input = Input({
@@ -52,7 +52,7 @@ const registerFormElements = (config = {}) => {
     labelText: "Repetir Contraseña",
     fieldsetClass: "w-38",
     name: "repeat_password",
-    pattern: "/[0-9a-zA-Z]{6,}/",
+    pattern: "",
     isRequired: true,
   });
   const register_button = Button({

@@ -28,7 +28,7 @@ const registerElements = (config = {}) => {
     logo: C.create(
       "div",
       {
-        className: "w-4/5 h-20 mt-7 flex items-center",
+        className: "w-4/5 h-20 mt-5 flex items-center",
       },
       [
         C.create(
@@ -42,12 +42,12 @@ const registerElements = (config = {}) => {
       ]
     ),
     title: C.create("h1", {
-      className: "text-3xl font-bold font-sans  my-10",
+      className: "text-3xl font-bold font-sans  mt-6 mb-3",
       innerHTML: "Registrarse",
     }),
     alreadyHaveAccount: C.create(
       "p",
-      { className: "mt-3", innerHTML: "¿Ya Tienes una cuenta?" },
+      { className: "mt-3 text-xs", innerHTML: "¿Ya Tienes una cuenta?" },
       [
         C.create("a", {
           className: "font-bold cursor-pointer underline",
