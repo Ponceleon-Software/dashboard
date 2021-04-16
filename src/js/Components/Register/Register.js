@@ -1,5 +1,6 @@
 import { ComponenteReactivo, CustomElement } from "../../Utils/reactivity.js";
 import { RegisterForm } from "../Forms/RegisterForm.js";
+import { samePasswords } from "../Forms/registerForm_Utilities.js";
 
 /**
  * Agrupa todos los elementos que definen el Componente de Login
@@ -91,6 +92,7 @@ _Register.prototype.constructor = _Register;
 const Register = ((config = {}) => {
   const elements = registerElements(config);
   const component = new _Register(elements);
+  samePasswords();
 
   return {
     container: () => elements.element,
