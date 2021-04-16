@@ -21,6 +21,16 @@ const validate_register_fields = () => {
   return allValid;
 };
 
+/**
+ * Definición del tipo RegisterFormMethods
+ * @typedef {Object} RegisterData
+ * @property {string} username Nombre de usuario
+ * @property {string} email  Correo Electrónico
+ * @property {string} password  Contraseña
+ * @property {number} phone  Numero de teléfono
+ 
+ */
+
 const getData = () => {
   const form = RegisterForm.getElements("form").form;
   const fields = Array.prototype.slice.call(form.getElementsByTagName("input"));
