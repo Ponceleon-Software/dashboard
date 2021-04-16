@@ -15,7 +15,7 @@ const inputElements = (
   }
 ) => {
   const { type, placeholder, labelText, isRequired, name } = config;
-  const pattern = config.pattern ? config.pattern : " ";
+  const pattern = config.pattern ? config.pattern : "";
   const className = config.className ? config.className : "w-full";
   const fieldsetClass = config.fieldsetClass ? config.fieldsetClass : "w-3/4";
   const inputConfig = {
