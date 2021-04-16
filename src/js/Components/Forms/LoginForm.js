@@ -12,9 +12,9 @@ import { Button } from "../Buttons/Button.js";
 const loginFormElements = (config = {}) => {
   const C = CustomElement;
   const user_input = Input({
-    type: "text",
-    placeholder: "Nombre de Usuario",
-    labelText: "Usuario",
+    type: "email",
+    placeholder: "Correo Electrónico",
+    labelText: "Correo Electrónico",
     isRequired: true,
   });
   const password_input = Input({

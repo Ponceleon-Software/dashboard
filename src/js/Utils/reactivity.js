@@ -66,8 +66,8 @@ ComponenteReactivo.prototype = {
 /**
  * Objeto que ayuda a la creación de elementos del DOM
  * @type {Object}
- * @property {function(string,HTMLElement)} createCrea un elemento y le añade atributos
- * @property {function(string)} fromHTML Convierte un string en formato html en un elemento del DOM
+ * @property {function(string,HTMLElement):HTMLElement} create - Crea un elemento y le añade atributos
+ * @property {function(string):HTMLElemen} fromHTML - Convierte un string en formato html en un elemento del DOM
  *
  */
 
@@ -75,11 +75,12 @@ const CustomElement = {
   /**
    *
    * Crea un elemento y le añade atributos
-   * @param {string} tagName El nombre de la etiqueta del elemento
-   * @param {any} options Un objeto con los atributos que se le
+   * @param {String} tagName El nombre de la etiqueta del elemento
+   * @param {object} options Un objeto con los atributos que se le
    * desea añadir a la etiqueta html
    * @param {HTMLElement[]} children Un arreglo de elementos que
    * se añadirán como hijos del elemento creado
+   * @param {function(function():any):void} onClick Una función al clickear al elemento creado
    * @return {HTMLElement}
    */
   create: (tagName, options = {}, children = [], onClick) => {
