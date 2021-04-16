@@ -11,32 +11,28 @@ const inputElements = (
     hasLabel: true,
     pattern: "",
     isRequired: false,
-    name: "heregoesthename",
+    name: "",
   }
 ) => {
-  const { type, placeholder, labelText, isRequired, name } = config;
-  const pattern = config.pattern ? config.pattern : "";
-  const className = config.className ? config.className : "w-full";
-  const fieldsetClass = config.fieldsetClass ? config.fieldsetClass : "w-3/4";
-  const inputConfig = {
-    name: name,
-    fieldsetClass: fieldsetClass,
-    required: isRequired,
-    type: type,
-    className: `${className} input input-bordered`,
-    placeholder: placeholder,
-  };
-  if (pattern) inputConfig.pattern = pattern;
+  const { labelText } = config;
+  const pattern = config.pattern || "";
+  if (pattern) config.pattern = pattern;
+  config.className =
+    `${
+      config.className ? config.className : " "
+    } input input-bordered w-full` || "w-full";
+  config.fieldsetClass = config.fieldsetClass || "w-3/4";
+
   const C = CustomElement;
   return {
-    parent: C.create("fieldset", { className: fieldsetClass }),
+    parent: C.create("fieldset", { className: config.fieldsetClass }),
     label: C.create("label", { className: "label" }, [
       C.create("span", {
         className: "label-text font-bold font-sans",
         innerHTML: labelText,
       }),
     ]),
-    input: C.create("input", inputConfig),
+    input: C.create("input", config),
   };
 };
 

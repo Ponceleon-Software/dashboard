@@ -1,10 +1,7 @@
-import { Input } from "./Input.js";
-
 const validateInput = (input) => {
   if (input.checkValidity()) {
     input.classList.add("input-success");
     input.classList.remove("input-error");
-    //input.classList.remove("input-error",true);
     return;
   }
   input.classList.remove("input-success");
@@ -16,9 +13,6 @@ const initValidateInput = (input) => {
   input.addEventListener("input", function (e) {
     validateInput(input);
   });
-  /*  input.addEventListener("change", function (e) {
-    validateAfterFocus(input);
-  }); */
 };
 
 export { initValidateInput };
