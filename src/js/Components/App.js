@@ -18,30 +18,23 @@ function _App(elements) {
     currentView: elements.view,
   };
 
-  this.element = elements.appContainer;
+  elements.appContainer.appendChild(elements.view);
+  this.appContainer = elements.appContainer;
   this.view = elements.view;
+  this.element = elements.appContainer;
 
   this.template = function () {
     const state = JSON.parse(JSON.stringify(this.state));
     const { isLogged, currentView } = state;
-    /*this.currentView = this.view;
-     this.isLogged= false; //PENDIENTE*/
-    if (this.state.currentView.currentView) {
-      console.log(this.state.currentView.currentView);
-      this.view = this.state.currentView.currentView;
-    }
-    elements.appContainer.appendChild(this.view);
-    //this.view = this.state.currentView.outerHTML;
-    //this.view=this.state.currentView;
+    this.view = this.state.currentView;
     return [this.view];
   };
 }
 _App.prototype = Object.create(ComponenteReactivo.prototype);
 _App.prototype.constructor = _App;
 
-const App = (config = {}) => {
+const App = ((config = {}) => {
   const elements = appElements(config);
-  elements.appContainer.appendChild(elements.view);
 
   const component = new _App(elements);
   component.render();
@@ -52,5 +45,5 @@ const App = (config = {}) => {
     changeView: (view) => component.setState({ currentView: view }),
     get: (elementName) => elements[elementName],
   };
-};
+})();
 export { App };

@@ -1,6 +1,7 @@
 import { ComponenteReactivo, CustomElement } from "../../Utils/reactivity.js";
 import { Input } from "../Inputs/Input.js";
 import { Button } from "../Buttons/Button.js";
+import { getData } from "./loginForm_Utilities.js";
 
 /**
  * Regresa el objeto con los elementos hijos del Componente de LoginForm
@@ -16,12 +17,14 @@ const loginFormElements = (config = {}) => {
     placeholder: "Correo Electrónico",
     labelText: "Correo Electrónico",
     isRequired: true,
+    name: "email",
   });
   const password_input = Input({
     type: "password",
     placeholder: "Contraseña",
     labelText: "Contraseña",
     isRequired: true,
+    name: "password",
   });
   const login_button = Button({
     buttonText: "Iniciar Sesión",
@@ -62,7 +65,7 @@ const loginFormElements = (config = {}) => {
 
 function _LoginForm(elements) {
   this.state = {
-    allFieldsValid: false,
+    allFieldsValid: true,
   };
   this.form = elements.form;
   this.button = elements.button;
@@ -108,6 +111,8 @@ const LoginForm = ((config = {}) => {
     elements: () => elements,
     get: (elementName) => elements[elementName],
     getComponent: () => component,
+    validateFields: () => true,
+    getData: () => getData(),
   };
 })();
 export { LoginForm };

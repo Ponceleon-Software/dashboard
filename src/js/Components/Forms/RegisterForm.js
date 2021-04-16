@@ -2,7 +2,11 @@ import { ComponenteReactivo, CustomElement } from "../../Utils/reactivity.js";
 import { Input } from "../Inputs/Input.js";
 import { Button } from "../Buttons/Button.js";
 import { Select } from "../Selects/Select.js";
-import { validate_register_fields, getData } from "./registerForm_Utilities.js";
+import {
+  validate_register_fields,
+  getData,
+  samePasswords,
+} from "./registerForm_Utilities.js";
 
 /**
  * @typedef {import('./registerForm_Utilities').RegisterData} RegisterData
@@ -31,23 +35,25 @@ const registerFormElements = (config = {}) => {
     labelText: "Correo Electrónico",
     isRequired: true,
     name: "email",
+    pattern:
+      "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)$",
   });
   const password_input = Input({
-    type: "text",
+    type: "password",
     placeholder: "Contraseña",
     labelText: "Contraseña",
     fieldsetClass: "w-38",
     name: "password",
-    pattern: "(?=^.{8,}$)((?=.*d)|(?=.*W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$",
+    pattern: "", //regex: (?=^.{8,}$)((?=.*d)|(?=.*W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$   // min: 8char,1Uppercase,1symbol/number
     isRequired: true,
   });
   const repeat_password_input = Input({
-    type: "text",
+    type: "password",
     placeholder: "Repita la Contraseña",
     labelText: "Repetir Contraseña",
     fieldsetClass: "w-38",
     name: "repeat_password",
-    pattern: "(?=^.{8,}$)((?=.*d)|(?=.*W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$",
+    pattern: "",
     isRequired: true,
   });
   const register_button = Button({
@@ -138,7 +144,6 @@ function _RegisterForm(elements) {
   this.template = function () {
     const state = JSON.parse(JSON.stringify(this.state));
     const { allFieldsValid } = state;
-    console.log(this.form);
 
     return [
       this.username_field,
@@ -189,6 +194,7 @@ const RegisterForm = ((config = {}) => {
     validateFields: () => validate_register_fields(),
     getData: () => getData(),
     setValid: (valid = true) => component.setState({ allFieldsValid: valid }),
+    samePasswords: () => samePasswords(),
   };
 })();
 export { RegisterForm };

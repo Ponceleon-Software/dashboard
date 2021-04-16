@@ -2,32 +2,23 @@ import { Input } from "./Input.js";
 
 const validateInput = (input) => {
   if (input.checkValidity()) {
-    input.classList.remove("input-warning");
     input.classList.add("input-success");
+    input.classList.remove("input-error");
+    //input.classList.remove("input-error",true);
     return;
   }
-  input.classList.remove("input-error");
   input.classList.remove("input-success");
-  input.classList.add("input-warning");
+  input.classList.add("input-error");
 };
 
 const initValidateInput = (input) => {
   if (input.getAttribute("pattern") == "") return;
-  input.addEventListener("keyup", function (e) {
+  input.addEventListener("input", function (e) {
     validateInput(input);
   });
-  input.addEventListener("focusout", function (e) {
+  /*  input.addEventListener("change", function (e) {
     validateAfterFocus(input);
-  });
+  }); */
 };
 
-const validateAfterFocus = (input) => {
-  if (!input.checkValidity()) {
-    input.classList.remove("input-warning");
-    input.classList.add("input-error");
-    return;
-  }
-  input.classList.remove("input-warning");
-  input.classList.add("input-success");
-};
 export { initValidateInput };

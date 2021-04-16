@@ -47,17 +47,19 @@ const initRegister = (Register) => {
     if (fieldsValid) {
       const data = Register.elements().form.getData();
       const { email, password } = data;
-      createAccount(email, password);
+      createAccount(email, password, button_register);
     }
   });
 };
 
-const createAccount = async (email, password) => {
+const createAccount = async (email, password, button) => {
+  button.classList.add("loading");
   firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
       const user = userCredential.user;
+      button.classList.remove("loading");
       //Sign.setState({ isLogged: true, token: user });
       changeMainView();
       // ...
@@ -71,5 +73,37 @@ const createAccount = async (email, password) => {
 
   //changeMainView();
 };
+const initLogin = (Login) => {
+  const button_login = Login.elements().form.elements().button;
 
-export { initSwitchView, randomWallpaperImg, initRegister };
+  button_login.addEventListener("click", function (e) {
+    Login.elements().form.validateFields();
+    const fieldsValid = Login.elements().form.getComponent().state
+      .allFieldsValid;
+    if (fieldsValid) {
+      const data = Login.elements().form.getData();
+      const { email, password } = data;
+      login(email, password, button_login);
+    }
+  });
+};
+const login = async (email, password, button) => {
+  button.classList.add("loading");
+  firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      // Signed in
+      button.classList.remove("loading");
+      var user = userCredential.user;
+      console.log(user);
+      changeMainView();
+      // ...
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+    });
+};
+
+export { initSwitchView, randomWallpaperImg, initRegister, initLogin };

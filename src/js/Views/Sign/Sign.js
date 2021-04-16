@@ -5,6 +5,7 @@ import {
   initSwitchView,
   randomWallpaperImg,
   initRegister,
+  initLogin,
 } from "./Sign_utilities.js";
 
 /**
@@ -51,6 +52,7 @@ function _Sign(elements) {
     currentForm: Login.get("parent"),
     currentWallpaper: elements.background.src,
     isLogged: false,
+    token: "",
   };
   this.element = elements.parent;
   this.form = elements.form;
@@ -58,7 +60,7 @@ function _Sign(elements) {
 
   this.template = function () {
     const state = JSON.parse(JSON.stringify(this.state));
-    const { currentForm, currentWallpaper, isLogged } = state;
+    const { currentForm, currentWallpaper, isLogged, token } = state;
     console.log(isLogged);
     this.background.src = randomWallpaperImg(currentWallpaper);
     this.form = this.state.currentForm;
@@ -92,6 +94,7 @@ const Sign = ((config = {}) => {
   const component = new _Sign(elements);
   initSwitchView(component, Register, Login);
   initRegister(Register);
+  initLogin(Login);
   return {
     container: () => elements.parent,
     elements: () => elements,
