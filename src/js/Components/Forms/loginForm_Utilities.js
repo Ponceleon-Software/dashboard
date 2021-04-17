@@ -1,6 +1,6 @@
 import { LoginForm } from "./LoginForm.js";
 const getData = () => {
-  const form = LoginForm.getElements("form").form;
+  const form = LoginForm.elements("form").form;
   const fields = Array.prototype.slice.call(form.getElementsByTagName("input"));
   const data = {};
   fields.forEach((el) => {
